@@ -12,6 +12,7 @@ namespace PasswordGen
     {
         static void Main(string[] args)
         {
+            //setup
             int wordCount = 0,
                 numberCount = 0,
                 specialCount = 0;
@@ -49,12 +50,14 @@ namespace PasswordGen
             camel = args.Contains("camel"),
             leetcaps = args.Contains("leetcaps");
 
+            //load wordlists
             string[] nouns = File.ReadAllLines("nouns.txt"),
             adjectives = File.ReadAllLines("adjectives.txt"),
             both = new string[nouns.Length + adjectives.Length];
             adjectives.CopyTo(both, 0);
             nouns.CopyTo(both, adjectives.Length);
 
+            //more setup
             Random rng = new Random();
             Dictionary<char, char> leetChars = new Dictionary<char, char>()
             {
@@ -80,6 +83,7 @@ namespace PasswordGen
             };
             char[] specialChars = "!,.?\'\"`~@#$%^&*-_=+\\/|()[]{}<>".ToCharArray();
 
+            //start actually generating passwords
             string password = both.RandomItem();
             wordCount--;
             if (caps)
